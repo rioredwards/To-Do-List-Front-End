@@ -1,0 +1,71 @@
+:root {
+    --background: rgb(224, 234, 247);
+    --header-background: white;
+    --text-color: rgb(7, 5, 68);
+    --label-color: rgb(75, 102, 98);
+    --placeholder-color: rgb(136, 136, 153);
+    --offset-color: rgb(217, 236, 217);
+    --action-color: rgb(77, 132, 252);
+
+    --primary-font: 'Rubik', Corbel, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans',
+        'DejaVu Sans', 'Bitstream Vera Sans', 'Liberation Sans', Verdana, 'Verdana Ref', sans-serif;
+}
+
+body {
+    height: 100vh;
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    background: var(--background);
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.page-header {
+    position: sticky;
+    top: 0;
+    padding: 15px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background-color: var(--header-background);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.page-header .logo {
+    height: 100%;
+}
+
+.page-header .title {
+    font-size: 1.3em;
+    font-weight: 800;
+    flex-grow: 2;
+}
+
+.page-header nav {
+    display: flex;
+    gap: 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+.avatar {
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+    border: 1px solid var(--placeholder-color);
+    border-radius: 100%;
+}
+
+.error {
+    min-height: 1em;
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
