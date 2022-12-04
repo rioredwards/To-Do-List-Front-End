@@ -3,7 +3,7 @@ import { getUser, signOutUser } from '../fetch-utils.js';
 async function loadData() {
     // make sure we have a user!
     const user = await getUser();
-
+    console.log('user: ', user);
     if (!user) {
         // redirect to /auth page, passing along where the user was redirected _from_
         location.replace(`/auth/?redirectUrl=${encodeURIComponent(location)}`);

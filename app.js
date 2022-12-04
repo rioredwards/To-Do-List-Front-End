@@ -1,4 +1,5 @@
 /* Imports */
+import './auth/user.js';
 
 /* Get DOM Elements */
 
