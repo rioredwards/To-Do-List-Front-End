@@ -27,12 +27,12 @@ export async function signUpUser(email, password) {
         credentials: 'include',
     });
     const data = await resp.json();
-    if (resp.ok) {
-        location.replace('./');
-    } else {
+    if (!resp.ok) {
         // eslint-disable-next-line no-console
         console.error(data.message);
+        data.error = data.message;
     }
+    return data;
 }
 
 export async function signInUser(email, password) {
@@ -54,7 +54,15 @@ export async function signInUser(email, password) {
     return data;
 }
 
-export async function signOutUser() {}
+export async function signOutUser() {
+    const resp = await fetch(`${BASE_URL}/api/v1/users/sessions`, {
+        method: 'DELETE',
+        credentials: 'include',
+    });
+    if (resp.ok) {
+        location.replace('/auth');
+    }
+}
 
 /* Data functions */
 
