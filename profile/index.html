@@ -7,11 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
         <!-- title and favicon -->
-        <title>To-Do-List</title>
+        <title>Profile</title>
         <link rel="icon" type="image/x-icon" href="/assets/todo-logo.png" />
 
         <!-- js -->
-        <script type="module" src="app.js"></script>
+        <script type="module" src="profile.js"></script>
 
         <!-- fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,16 +30,16 @@
     <body>
         <header class="page-header">
             <img class="logo" src="/assets/todo-logo.png" alt="logo" />
-            <p class="title">ToDo List</p>
+            <p class="title">Profile</p>
             <nav>
                 <a href="/">Home</a>
-                <a id="profile-link" href="profile">Profile</a>
+                <a id="profile-link" href="/">Profile</a>
                 <a id="sign-out-link" href="auth">Sign Out</a>
             </nav>
         </header>
 
         <main>
-            <ul id="todo-list"></ul>
+            <section id="profile-container"></section>
         </main>
     </body>
 </html>
