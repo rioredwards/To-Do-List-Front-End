@@ -65,5 +65,20 @@ export async function signOutUser() {
 }
 
 /* Data functions */
-
-export async function fetchToDos() {}
+export async function fetchToDos() {
+    const resp = await fetch(`${BASE_URL}/api/v1/todos`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+        return data;
+    } else {
+        // eslint-disable-next-line no-console
+        console.error(data.message);
+    }
+}

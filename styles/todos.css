@@ -1,0 +1,12 @@
+#todo-list {
+    background-color: var(--header-background);
+    margin: 4rem auto;
+    padding: 2rem;
+    width: 30rem;
+}
+
+#todo-list > li {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+}
