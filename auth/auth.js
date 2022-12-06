@@ -56,6 +56,7 @@ authForm.addEventListener('submit', async (e) => {
         response = await signInUser(formData.get('email'), formData.get('password'));
     } else {
         response = await signUpUser(formData.get('email'), formData.get('password'));
+        response = await signInUser(formData.get('email'), formData.get('password'));
     }
 
     const error = response.error;

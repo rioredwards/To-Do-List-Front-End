@@ -101,3 +101,24 @@ export async function createTodo(description) {
         console.error(data.message);
     }
 }
+
+export async function updateToDo(id, newAttrs) {
+    console.log(newAttrs);
+    console.log(id);
+    const resp = await fetch(`${BASE_URL}/api/v1/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newAttrs),
+        credentials: 'include',
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+        return data;
+    } else {
+        // eslint-disable-next-line no-console
+        console.error(data.message);
+    }
+}
