@@ -22,39 +22,65 @@ main {
 }
 
 #todo-list > li {
-    padding: 0.5rem 2rem;
-    background-color: var(--header-background);
-    display: flex;
-    justify-content: space-between;
-}
-
-#todo-list > li {
+    height: 5rem;
     padding: 0.5rem 2rem;
     margin-top: 1rem;
     background-color: var(--header-background);
 
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-columns: 8fr repeat(3, 1fr);
     column-gap: 1rem;
     justify-content: space-between;
+    align-content: center;
 }
 
 .checkbox,
-.deleteBtn {
+.deleteBtn,
+.editBtn,
+.editTodoSubmitBtn,
+.input {
     cursor: pointer;
     margin: auto;
     padding: 0;
-    height: 2rem;
-    width: 2rem;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
-.deleteBtn {
+.deleteBtn,
+.editBtn {
     border: none;
     background-color: transparent;
 }
 
-.deleteBtnImg {
+.deleteBtnImg,
+.editBtnImg {
     margin: 0;
     padding: 0;
-    width: 2rem;
+    width: 1.5rem;
+}
+
+.editTodoSubmitBtn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+}
+
+.todoEditForm {
+    margin: 0;
+    padding: 0;
+    grid-column-start: 1;
+    grid-column-end: -1;
+
+    display: grid;
+    grid-template-columns: 8fr repeat(3, 1fr);
+    column-gap: 1rem;
+    justify-content: space-between;
+}
+
+input {
+    margin: auto auto auto 0;
+    font-size: 1.17em;
+    height: 2rem;
 }

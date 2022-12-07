@@ -2,12 +2,12 @@
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
 import { createTodo, deleteTodo, fetchToDos, updateToDo } from './fetch-utils.js';
-import { renderToDo } from './render-utils.js';
+import { renderToDo, renderToDoEditable } from './render-utils.js';
 
 /* Get DOM Elements */
 const errorDisplay = document.getElementById('error');
 const addTodoForm = document.getElementById('add-todo-form');
-const submitBtn = document.getElementById('submit-btn');
+const addTodoSubmitBtn = document.getElementById('submit-btn');
 const todoList = document.getElementById('todo-list');
 
 /* State */
@@ -16,7 +16,6 @@ let todos = [];
 
 /* Events */
 window.addEventListener('load', async () => {
-    console.log('window reload!');
     todos = [];
     todos = await fetchToDos();
     displayTooDos();
@@ -24,7 +23,7 @@ window.addEventListener('load', async () => {
 
 addTodoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitBtn.disabled = true;
+    addTodoSubmitBtn.disabled = true;
 
     const formData = new FormData(addTodoForm);
     const description = formData.get('description');
@@ -35,7 +34,7 @@ addTodoForm.addEventListener('submit', async (e) => {
     displayTooDos();
 
     addTodoForm.reset();
-    submitBtn.disabled = false;
+    addTodoSubmitBtn.disabled = false;
 });
 
 async function displayTooDos() {
@@ -48,6 +47,9 @@ async function displayTooDos() {
 
         const deleteBtn = container.querySelector('.deleteBtn');
         deleteBtn.addEventListener('click', await handleDeleteClick);
+
+        const editBtn = container.querySelector('.editBtn');
+        editBtn.addEventListener('click', await handleEditClick);
 
         todoList.append(container);
     }
@@ -63,10 +65,45 @@ async function handleCheckboxUpdate(e) {
     const response = await updateToDo(parentId, { complete: isChecked });
 }
 
-async function handleDeleteClick(e) {
+async function handleEditClick(e) {
+    // Select elements
+    const container = e.currentTarget.parentNode;
+
+    // Render New container with form
+    // (Delete old elements and replace with text box)
+    const form = renderToDoEditable(container);
+
+    // Add event listener to form
+    form.addEventListener('submit', await handleEditFormSubmit);
+    container.append(form);
+}
+
+async function handleEditFormSubmit(e) {
     e.preventDefault();
 
-    const deleteBtn = e.target;
+    // Select Elements
+    const container = e.currentTarget.parentNode;
+    const editForm = e.currentTarget;
+    const editTodoSubmitBtn = editForm.querySelector('#editTodoSubmitBtn');
+
+    editTodoSubmitBtn.disabled = true;
+
+    const formData = new FormData(editForm);
+    const todoEditInput = formData.get('todoEditInput');
+
+    const response = await updateToDo(container.dataset.id, { description: todoEditInput });
+
+    const index = todos.findIndex((element) => element.id === container.dataset.id);
+    // Replace old ToDo with New one
+    todos[index] = response;
+    displayTooDos();
+
+    editForm.reset();
+    editTodoSubmitBtn.disabled = false;
+}
+
+async function handleDeleteClick(e) {
+    const deleteBtn = e.currentTarget;
     const parentId = deleteBtn.parentNode.dataset.id;
     await deleteTodo(parentId);
 
@@ -75,15 +112,4 @@ async function handleDeleteClick(e) {
     // Remove todo from local todos array
     todos.splice(index, 1);
     displayTooDos();
-}
-
-/* Display Functions */
-function displayError() {
-    if (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        errorDisplay.textContent = error.message;
-    } else {
-        errorDisplay.textContent = '';
-    }
 }
