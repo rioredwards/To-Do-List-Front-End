@@ -1,0 +1,86 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 30rem 1fr;
+    grid-template-rows: 10rem auto;
+    row-gap: 1rem;
+}
+
+#add-todo-form {
+    grid-row: 1;
+    grid-column: 2;
+    background-color: var(--header-background);
+    padding: 1rem;
+}
+
+#add-todo-form > label {
+    display: block;
+}
+
+#todo-list {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+#todo-list > li {
+    height: 5rem;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    background-color: var(--header-background);
+
+    display: grid;
+    grid-template-columns: 8fr repeat(3, 1fr);
+    column-gap: 1rem;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.checkbox,
+.deleteBtn,
+.editBtn,
+.editTodoSubmitBtn,
+.input {
+    cursor: pointer;
+    margin: auto;
+    padding: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.deleteBtn,
+.editBtn {
+    border: none;
+    background-color: transparent;
+}
+
+.deleteBtnImg,
+.editBtnImg {
+    margin: 0;
+    padding: 0;
+    width: 1.5rem;
+}
+
+.editTodoSubmitBtn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+}
+
+.todoEditForm {
+    margin: 0;
+    padding: 0;
+    grid-column-start: 1;
+    grid-column-end: -1;
+
+    display: grid;
+    grid-template-columns: 8fr repeat(3, 1fr);
+    column-gap: 1rem;
+    justify-content: space-between;
+}
+
+input {
+    margin: auto auto auto 0;
+    font-size: 1.17em;
+    height: 2rem;
+}
