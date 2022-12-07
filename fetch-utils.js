@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:7890';
+const BASE_URL = 'https://todos-api-rio.herokuapp.com/';
 /* Auth related functions */
 
 export async function getUser() {
