@@ -1,7 +1,8 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
-import { createTodo, fetchToDos, updateToDo } from './fetch-utils.js';
+import { createTodo, deleteTodo, fetchToDos, updateToDo } from './fetch-utils.js';
+import { renderToDo } from './render-utils.js';
 
 /* Get DOM Elements */
 const errorDisplay = document.getElementById('error');
@@ -29,7 +30,7 @@ addTodoForm.addEventListener('submit', async (e) => {
     const description = formData.get('description');
 
     const response = await createTodo(description);
-    console.log(response);
+
     todos.unshift(response);
     displayTooDos();
 
@@ -40,29 +41,40 @@ addTodoForm.addEventListener('submit', async (e) => {
 async function displayTooDos() {
     todoList.innerHTML = '';
     for (let todo of todos) {
-        const li = document.createElement('li');
-        li.dataset.id = todo.id;
-        const h3 = document.createElement('h3');
-        const checkbox = document.createElement('input');
-        checkbox.setAttribute('type', 'checkbox');
-        if (todo.complete) {
-            checkbox.setAttribute('checked', 'true');
-        } else {
-            checkbox.removeAttribute('checked');
-        }
+        const container = renderToDo(todo);
+
+        const checkbox = container.querySelector('.checkbox');
         checkbox.addEventListener('change', await handleCheckboxUpdate);
-        h3.textContent = todo.description;
-        li.append(h3, checkbox);
-        todoList.append(li);
+
+        const deleteBtn = container.querySelector('.deleteBtn');
+        deleteBtn.addEventListener('click', await handleDeleteClick);
+
+        todoList.append(container);
     }
 }
 
+/* Event Handlers */
 async function handleCheckboxUpdate(e) {
     const checkbox = e.target;
     const parentId = checkbox.parentNode.dataset.id;
+
     let isChecked = false;
     if (checkbox.checked) isChecked = true;
     const response = await updateToDo(parentId, { complete: isChecked });
+}
+
+async function handleDeleteClick(e) {
+    e.preventDefault();
+
+    const deleteBtn = e.target;
+    const parentId = deleteBtn.parentNode.dataset.id;
+    await deleteTodo(parentId);
+
+    // Find index of todo in todos to delete
+    const index = todos.findIndex((element) => element.id === parentId);
+    // Remove todo from local todos array
+    todos.splice(index, 1);
+    displayTooDos();
 }
 
 /* Display Functions */

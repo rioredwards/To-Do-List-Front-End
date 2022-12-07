@@ -27,3 +27,34 @@ main {
     display: flex;
     justify-content: space-between;
 }
+
+#todo-list > li {
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    background-color: var(--header-background);
+
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    column-gap: 1rem;
+    justify-content: space-between;
+}
+
+.checkbox,
+.deleteBtn {
+    cursor: pointer;
+    margin: auto;
+    padding: 0;
+    height: 2rem;
+    width: 2rem;
+}
+
+.deleteBtn {
+    border: none;
+    background-color: transparent;
+}
+
+.deleteBtnImg {
+    margin: 0;
+    padding: 0;
+    width: 2rem;
+}
