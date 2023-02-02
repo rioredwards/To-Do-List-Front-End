@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- metadata -->
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- title and favicon -->
+        <title>Profile</title>
         <link rel="icon" type="image/x-icon" href="/assets/todo-logo.png" />
 
-        <script type="module" src="auth.js"></script>
+        <!-- js -->
+        <script type="module" src="profile.js"></script>
 
+        <!-- fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -15,33 +21,25 @@
             href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Titillium+Web:wght@200;400;600&display=swap"
         />
 
+        <!-- css -->
         <link rel="stylesheet" href="/styles/reset.css" />
         <link rel="stylesheet" href="/styles/global.css" />
-        <link rel="stylesheet" href="/styles/form.css" />
-        <title>Auth</title>
+        <!-- add link for page specific css -->
     </head>
 
     <body>
         <header class="page-header">
-            <img class="logo" src="/assets/todo-logo.png" />
-            <p class="title">User Auth</p>
+            <img class="logo" src="/assets/todo-logo.png" alt="logo" />
+            <p class="title">Profile</p>
+            <nav>
+                <a href="/">Home</a>
+                <a id="profile-link" href="/">Profile</a>
+                <a id="sign-out-link" href="../auth/">Sign Out</a>
+            </nav>
         </header>
 
         <main>
-            <form id="auth-form">
-                <h2></h2>
-                <label>
-                    Email
-                    <input type="email" name="email" required />
-                </label>
-                <label>
-                    Password
-                    <input type="password" name="password" required />
-                </label>
-                <button></button>
-                <p class="error"></p>
-                <a href=""></a>
-            </form>
+            <section id="profile-container"></section>
         </main>
     </body>
 </html>
